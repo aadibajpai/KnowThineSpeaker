@@ -1,9 +1,22 @@
-#include<bits/stdc++.h>
+#include<vector>
+#include<cstring>
+#include<set>
 #include "srtparser.h"
 #include<windows.h>
 using namespace std;
 
 
+string urlReady(string s){
+    int n=sizeof(s),i=0;
+    char arr[n];
+    strcpy(arr,s.c_str());
+    for(i;i<n;i++){
+        if(arr[i]==' ')
+            arr[i]='+';
+    }
+    string str(arr);
+    return str;
+}
 string trim(const string& str)
 {
     size_t first = str.find_first_not_of(' ');
@@ -44,9 +57,10 @@ cout<<"The speakers are--> ";
 cout << *fset.begin();
 fset.erase(fset.begin());
 for(auto x:fset) cout << ", "<< x;
-cout<<endl<<"Which speaker do you want to know about? (Enter without spaces ;))"<<endl;
-cin>>speakername;
-speakername = "http://www.google.com/search?as_q="+speakername;
+cout<<endl<<"Which speaker do you want to know about?"<<endl; 
+cin.ignore();
+getline (cin, speakername);
+speakername = "http://www.google.com/search?as_q="+urlReady(speakername);
 ShellExecute(NULL, "open", speakername.c_str(), NULL, NULL, SW_SHOWNORMAL);
 return 0;
 }
